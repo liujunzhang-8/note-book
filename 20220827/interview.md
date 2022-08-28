@@ -111,6 +111,12 @@ for(let key of myArray){
 
 ## `null` 的 `typeof 为 Object`，这是为什么？
 
+null是一种基本数据类型，存储在栈区；而`typeof null`的结果却是`Object`，而`Object`是引用数据类型，存储在堆区。其次，根据代码`alert (person instance of Object)`输出结果为`false`,我们可以知道`null`并不是`Object`的实例，两者之间存在矛盾。
+
+简单来说，  `typeof null`的结果为`Object`的原因是一个bug。在 `javascript` 的最初版本中，使用的 `32` 位系统，`js`为了性能优化，使用低位来存储变量的类型信息。
+
+在判断数据类型时，是根据机器码低位标识来判断的，而`null`的机器码标识为全`0`，而对象的机器码低位标识为`000`。所以`typeof null`的结果被误判为`Object`。
+
 ## `symbol` 的使用场景？
 
 ## Ts 中 `never` 是什么意思？使用场景是什么？
@@ -118,3 +124,31 @@ for(let key of myArray){
 ## Ts 中 `any` 是什么意思？使用场景是什么？
 
 ## `forEach` 如何终止循环？
+
+### JS 如何终止 forEach 循环 break 报错，return 跳不出循环
+
+`终止 forEach 可以使用 try catch 内部抛出错误，catch 捕获错误。`
+
+```javascript
+let arr = [1, 2, 3]
+try {
+  arr.forEach(item => {
+    if (item === 2) {
+      throw('循环终止')
+    }
+    console.log(item)
+  })
+} catch(e) {
+  console.log('e: ', e)
+}
+```
+
+`还可以使用其它方法:`
+
+1.Array.prototype.some
+
+`当 return true 的时候，会终止遍历`
+
+2.Array.prototype.every
+
+`当 return false 的时候，会终止遍历`
