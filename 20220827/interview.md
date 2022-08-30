@@ -266,3 +266,12 @@ try {
 2.Array.prototype.every
 
 `当 return false 的时候，会终止遍历`
+
+## import 原理 （实际上就是ES6的原理）
+
+1、简单来说就是闭包的运用
+2、为了创建Module的内部作用域，会调用一个包装函数
+3、包装函数的返回值也就是Module向外公开的API，也就是所有export出去的变量
+4、import也就是拿到module导出变量的引用
+
+## import 和 require 的区别
