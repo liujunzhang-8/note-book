@@ -274,4 +274,46 @@ try {
 3、包装函数的返回值也就是Module向外公开的API，也就是所有export出去的变量
 4、import也就是拿到module导出变量的引用
 
+### 与require的不同
+
+1、CommonJS模块输出的是一个值的拷贝，ES6模块输出的是值的引用
+2、CommonJS模块是运行时加载，ES6模块是编译时输出接口
+
+CommonJS是运行时加载对应模块，一旦输出一个值，即使模块内部对其做出改变，也不会影响输出值，如：
+
+```javascript
+// a.js
+var a = 1;
+function changeA(val) {
+    a = val;
+}
+module.exports = {
+    a: a,
+    changeA: changeA,
+}
+
+// b.js
+var modA = require('./a.js');
+console.log('before', modA.a); // 输出1
+modA.changeA(2);
+console.log('after', modA.a); // 还是1
+```
+
+而ES6模块则不同，import导入是在JS引擎对脚步静态分析时确定，获取到的是一个只读引用。等脚本增长运行时，会根据这个引用去对应模块中取值。所以引用对应的值改变时，其导入的值也会变化
+
 ## import 和 require 的区别
+
+`1、require,exports,module.exports属于CommonJS规范,import,export,export default属于ES6规范`
+
+`2、require支持动态导入,动态匹配路径,import对这两者都不支持`
+
+`3、require是运行时调用,import是编译时调用`
+
+`4、require是赋值过程,import是解构过程`
+
+`5、对于export和export default 不同的使用方式,import就要采取不同的引用方式,主要区别在于是否存在{},export导出的,import导入需要{},导入和导出一一对应,export default默认导出的,import导入不需要{}`
+
+`6、exports是module.exports一种简写形式,不能直接给exports赋值`
+
+`7、当直接给module.exports赋值时,exports会失效.`
+
