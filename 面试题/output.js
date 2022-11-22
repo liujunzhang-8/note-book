@@ -296,6 +296,7 @@ export const sum = (a, b) => a + b;
 // 输出 running sum.js, running index.js, 3
 // import命令是编译阶段执行的，在代码运行之前。因此这意味着被导入的模块会先运行，而导入模块的文件会后执行。这是CommonJS中require（）和import之间的区别
 // 使用require()，您可以在运行代码时根据需要加载依赖项。 如果我们使用require而不是import，running index.js，running sum.js，3会被依次打印
+import { sum } from './output';
 
 console.log(Number(2) === Number(2))
 console.log(Boolean(false) === Boolean(false))
@@ -381,3 +382,53 @@ for (let item of myLifeSummedUp) {
 }
 
 // 输出 0 1 2 3 and "☕" "💻" "🍷" "🍫"
+
+var status = "😎"
+
+setTimeout(() => {
+    const status = "😍"
+
+    const data = {
+        status: "🥑",
+        getStatus() {
+            return this.status
+        }
+    }
+
+    console.log(data.getStatus()) // this指向的就是data对象。 当我们打印this.status时，data对象的status属性被打印，即"🥑"
+    console.log(data.getStatus.call(this)) // 将this的指向由data对象更改为全局对象
+}, 0)
+
+// 输出 "🥑" and "😎" this关键字的指向取决于使用它的位置  使用call方法，可以更改this指向的对象
+
+const person = {
+    name: "Lydia",
+    age: 21
+}
+
+let city = person.city /** undefined */
+city = "Amsterdam" // 这不会更改person对象：没有对该对象的引用
+
+console.log(person)
+
+// 输出 { name: "Lydia", age: 21 }
+
+function checkAge(age) {
+    if (age < 18) {
+        const message = "Sorry, you're too young."
+    } else {
+        const message = "Yay! You're old enough!"
+    }
+
+    return message /** 由于块级作用域，我们无法在声明的块之外引用变量，因此抛出ReferenceError。 */
+}
+
+console.log(checkAge(21))
+
+// 输出 ReferenceError const和let声明的变量是具有块级作用域的，块是大括号（{}）之间的任何东西, 即上述情况if / else语句的花括号。 
+
+fetch('https://www.website.com/api/user/1')
+    .then(res => res.json())
+    .then(res => console.log(res)) /** 第二个.then中res的值等于前一个.then中的回调函数返回的值 */
+
+// 输出 前一个.then()中回调方法返回的结果  你可以像这样继续链接.then，将值传递给下一个处理程序
