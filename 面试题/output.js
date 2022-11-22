@@ -468,3 +468,9 @@ function Person() {
     this.name = name
 }
 // 通过new来调用构造函数，将会生成构造函数Person的实例，对实例执行typeof关键字将返回"object"，上述情况打印出"object"。
+
+let newList = [1, 2, 3].push(4) /** newList等于数组的新长度：4 */
+
+console.log(newList.push(5)) /** 尝试在newList上使用.push方法。 由于newList是数值4，抛出TypeError。 */
+
+// Error .push方法返回数组的长度，而不是数组本身！
