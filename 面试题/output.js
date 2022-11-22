@@ -432,3 +432,13 @@ fetch('https://www.website.com/api/user/1')
     .then(res => console.log(res)) /** 第二个.then中res的值等于前一个.then中的回调函数返回的值 */
 
 // 输出 前一个.then()中回调方法返回的结果  你可以像这样继续链接.then，将值传递给下一个处理程序
+
+function getName(name) {
+    const hasName = //
+}
+
+// !!name 使用逻辑非运算符!，将返回一个布尔值，使用!! name，我们可以确定name的值是真的还是假的
+
+console.log("I want pizza"[0]) /**  请注意，IE7及更低版本不支持此方法。 在这种情况下，应该使用.charAt（） */
+
+// 输出 "I" 可以使用方括号表示法获取字符串中特定索引的字符，字符串中的第一个字符具有索引0，依此类推
