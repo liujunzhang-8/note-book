@@ -442,3 +442,29 @@ function getName(name) {
 console.log("I want pizza"[0]) /**  请注意，IE7及更低版本不支持此方法。 在这种情况下，应该使用.charAt（） */
 
 // 输出 "I" 可以使用方括号表示法获取字符串中特定索引的字符，字符串中的第一个字符具有索引0，依此类推
+
+// module.js 
+export default () => "Hello world"
+export const name = "Lydia"
+
+// index.js 
+import * as data from "./module" /** 使用import * as name语法，我们将module.js文件中所有export导入到index.js文件中，并且创建了一个名为data的新对象 */
+
+console.log(data)
+
+// { default: function default(), name: "Lydia" }
+
+class Person {
+    constructor(name) {
+        this.name = name
+    }
+}
+
+const member = new Person("John")
+console.log(typeof member)
+
+// 输出 "object" 类是构造函数的语法糖，如果用构造函数的方式来重写Person类则将是：
+function Person() {
+    this.name = name
+}
+// 通过new来调用构造函数，将会生成构造函数Person的实例，对实例执行typeof关键字将返回"object"，上述情况打印出"object"。
