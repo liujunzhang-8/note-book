@@ -474,3 +474,34 @@ let newList = [1, 2, 3].push(4) /** newList等于数组的新长度：4 */
 console.log(newList.push(5)) /** 尝试在newList上使用.push方法。 由于newList是数值4，抛出TypeError。 */
 
 // Error .push方法返回数组的长度，而不是数组本身！
+
+function giveLydiaPizza() {
+    return "Here is pizza!" /** 常规函数，有一个prototype属性，它是一个带有constructor属性的对象（原型对象）。 */
+}
+
+const giveLydiaChocolate = () => "Here's chocolate... now go hit the gym already."
+
+console.log(giveLydiaPizza.prototype)
+console.log(giveLydiaChocolate.prototype) /** 箭头函数，没有这个prototype属性 */
+
+// 输出 { constructor: ...} undefined
+
+const person = {
+    name: "Lydia",
+    age: 21
+}
+
+for (const [x, y] of Object.entries(person)) { /** Object.entries()方法返回一个给定对象自身可枚举属性的键值对数组 */
+/** [['name'，'Lydia']，['age'，21]] */
+    console.log(x, y)
+}
+
+// 输出 name Lydia and age 21
+
+function getItems(fruitList, ...args, favoriteFruit) { /** ...args是剩余参数，剩余参数的值是一个包含所有剩余参数的数组，并且只能作为最后一个参数 */
+    return [...fruitList, ...args, favoriteFruit]
+}
+
+getItems(["banana", "apple"], "pear", "orange")
+
+// 输出 SyntaxError
